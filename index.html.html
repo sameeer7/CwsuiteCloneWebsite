@@ -1,0 +1,2033 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CW Suite | All-In-One Retail Suite for Modern Businesses</title>
+    <meta name="description"
+        content="Transform retail operations with our comprehensive suite of apps including POS, Inventory Management, Sales Management, and more. Start your free trial today!">
+    <meta property="og:title" content="CW Suite | All-In-One Retail Suite">
+    <meta property="og:description"
+        content="Transform retail operations with our comprehensive suite of apps including POS, Inventory Management, and more.">
+    <meta property="og:image"
+        content="https://images.pexels.com/photos/3184297/pexels-photo-3184297.jpeg?auto=compress&cs=tinysrgb&w=900">
+    <meta property="og:url" content="https://cwsuite.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            /* Light Theme Variables */
+            --primary: rgb(155, 213, 5);
+            --primary-dark: #8AB804;
+            --secondary: #0dcaf0;
+            --accent: #6f42c1;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --border: #dee2e6;
+            --success: #198754;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s ease;
+            --radius: 12px;
+            --bg-color: #ffffff;
+            --text-color: #212529;
+            --card-bg: #ffffff;
+            --footer-bg: #212529;
+            --footer-text: #ffffff;
+            --analytics-bg: #f8f9fa;
+        }
+
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --primary: rgb(155, 213, 5);
+            --primary-dark: #8AB804;
+            --secondary: #0dcaf0;
+            --accent: #9b71e3;
+            --dark: #f8f9fa;
+            --light: #212529;
+            --gray: #adb5bd;
+            --light-gray: #343a40;
+            --border: #495057;
+            --success: #20c997;
+            --warning: #ffca2c;
+            --danger: #dc3545;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            --bg-color: #121212;
+            --text-color: #f8f9fa;
+            --card-bg: #1e1e1e;
+            --footer-bg: #0d0d0d;
+            --footer-text: #f8f9fa;
+            --analytics-bg: #1a1a1a;
+            --announcement-bg: #343a40;
+            /* Slightly lighter than dark bg */
+            --announcement-text: #f8f9fa;
+
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            line-height: 1.2;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #ffffff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-lg {
+            padding: 18px 40px;
+            font-size: 18px;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: var(--light-gray);
+            border-radius: 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .theme-toggle .toggle-circle {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle .sun-icon,
+        .theme-toggle .moon-icon {
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .theme-toggle .sun-icon {
+            opacity: 1;
+        }
+
+        .theme-toggle .moon-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .theme-toggle .toggle-circle {
+            transform: translateX(30px);
+        }
+
+        [data-theme="dark"] .theme-toggle .sun-icon {
+            opacity: 0;
+        }
+
+        [data-theme="dark"] .theme-toggle .moon-icon {
+            opacity: 1;
+        }
+
+        /* Sticky CTA */
+        .sticky-cta {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: none;
+            background: var(--primary);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        /* Announcement Banner */
+        .announcement-banner {
+            background: var(--dark);
+            color: #ffffff;
+            padding: 12px 24px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1100;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .announcement-banner a {
+            color: var(--primary);
+            text-decoration: underline;
+            transition: var(--transition);
+        }
+
+        .announcement-banner a:hover {
+            color: var(--primary-dark);
+        }
+
+        .announcement-banner .close-btn {
+            position: absolute;
+            right: 16px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #ffffff;
+            transition: var(--transition);
+        }
+
+        .announcement-banner .close-btn:hover {
+            color: var(--primary);
+        }
+
+        .announcement-banner.hidden {
+            display: none;
+        }
+
+        /* Update announcement banner */
+        .announcement-banner {
+            background: var(--announcement-bg);
+            color: var(--announcement-text);
+        }
+
+        .announcement-banner a {
+            color: var(--primary);
+        }
+
+        .announcement-banner .close-btn {
+            color: var(--announcement-text);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 40px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+            padding: 20px 0;
+            transition: top 0.3s ease;
+        }
+
+        [data-theme="dark"] header {
+            background: rgba(30, 30, 30, 0.95);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        header.no-banner {
+            top: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary);
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-color);
+        }
+
+        .logo-text span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 200px 0 120px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        [data-theme="dark"] .hero {
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(18, 18, 18, 1) 100%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.15) 0%, rgba(13, 202, 240, 0.05) 100%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 28px;
+            color: var(--text-color);
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+            position: relative;
+        }
+
+        .hero h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 12px;
+            left: 0;
+            width: 100%;
+            height: 14px;
+            background: rgba(155, 213, 5, 0.2);
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        [data-theme="dark"] .features {
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(18, 18, 18, 1) 100%);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+            cursor: pointer;
+        }
+
+        .feature-icon {
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--light-gray) 100%);
+        }
+
+        .feature-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+
+        .feature-content {
+            padding: 32px;
+        }
+
+        .feature-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-content p {
+            color: var(--gray);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        /* Analytics Section */
+        .analytics {
+            padding: 100px 0;
+            background: var(--analytics-bg);
+        }
+
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .analytics-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .analytics-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .analytics-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+            color: var(--text-color);
+            text-align: center;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 250px;
+            width: 100%;
+        }
+
+        /* Apps Section */
+        .apps {
+            padding: 120px 0;
+            background: var(--light-gray);
+            position: relative;
+        }
+
+        [data-theme="dark"] .apps {
+            background: var(--bg-color);
+        }
+
+        .apps-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .apps-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .apps-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        .app-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            width: 360px;
+            margin: 0 20px;
+            flex: 0 0 auto;
+        }
+
+        .app-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+        }
+
+        .app-icon {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--light-gray) 100%);
+            color: var(--primary);
+            font-size: 40px;
+        }
+
+        .app-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .app-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 16px;
+        }
+
+        .app-card p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+        }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: #ffffff;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            z-index: 10;
+            font-size: 24px;
+            transition: var(--transition);
+        }
+
+        .scroll-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .scroll-btn.left {
+            left: 0;
+        }
+
+        .scroll-btn.right {
+            right: 0;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Clients Section */
+        .clients {
+            padding: 80px 0;
+            background: var(--bg-color);
+            position: relative;
+        }
+
+        .clients::before,
+        .clients::after {
+            content: '';
+            position: absolute;
+            left: 40px;
+            right: 40px;
+            height: 4px;
+            background: rgba(155, 213, 5, 0.5);
+        }
+
+        .clients::before {
+            top: 0;
+        }
+
+        .clients::after {
+            bottom: 0;
+        }
+
+        .clients-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .clients-scroll {
+            display: flex;
+            width: max-content;
+            animation: scroll 20s linear infinite;
+        }
+
+        .clients-scroll:hover {
+            animation-play-state: paused;
+        }
+
+        .client-logo {
+            flex: 0 0 auto;
+            width: 200px;
+            height: 100px;
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .client-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+
+        .client-logo img:hover {
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 140px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #ffffff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .cta::after {
+            content: '';
+            position: absolute;
+            bottom: -150px;
+            left: -120px;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 28px;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            margin-bottom: 48px;
+            opacity: 0.9;
+        }
+
+        .cta .btn {
+            background: #ffffff;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .cta .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(33, 37, 41, 0.2);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 120px 0;
+            background: var(--bg-color);
+        }
+
+        /* Add to CSS */
+        .testimonial-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            overflow: hidden;
+            /* Ensures image stays circular */
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Ensures proper image scaling */
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+            background: linear-gradient(135deg, rgba(155, 213, 5, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%);
+            cursor: pointer;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .testimonial-info p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        .testimonial-content {
+            position: relative;
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 24px;
+            font-size: 1rem;
+        }
+
+        .rating {
+            color: var(--warning);
+            font-size: 1.1rem;
+        }
+
+        /* FAQ */
+        .faq {
+            padding: 120px 0;
+            background: var(--light-gray);
+        }
+
+        [data-theme="dark"] .faq {
+            background: var(--bg-color);
+        }
+
+        .faq-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            background: var(--card-bg);
+            padding: 24px 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+            font-size: 1.1rem;
+            color: var(--text-color);
+        }
+
+        .faq-question:hover {
+            background: var(--light-gray);
+        }
+
+        .faq-answer {
+            background: var(--card-bg);
+            padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .faq-answer p {
+            padding: 0 0 30px;
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .faq-item.active .faq-question {
+            background: var(--primary);
+            color: #ffffff;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 600px;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 100px 0 50px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 48px;
+            margin-bottom: 80px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 16px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: #ffffff;
+            padding-left: 8px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            text-align: center;
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero {
+                padding: 160px 0 80px;
+            }
+
+            .hero h1 {
+                font-size: 3.2rem;
+            }
+
+            .client-logo {
+                width: 160px;
+                height: 80px;
+                margin: 0 30px;
+            }
+
+            .app-card {
+                width: 320px;
+                margin: 0 15px;
+            }
+
+            .app-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .app-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .app-card p {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--card-bg);
+                padding: 24px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            [data-theme="dark"] .nav-links {
+                background: var(--card-bg);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.15rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .sticky-cta {
+                display: block;
+            }
+
+            .client-logo {
+                width: 120px;
+                height: 60px;
+                margin: 0 20px;
+            }
+
+            .app-card {
+                width: 280px;
+                margin: 0 10px;
+                padding: 24px;
+            }
+
+            .scroll-btn {
+                display: none;
+            }
+
+            .nav-actions {
+                gap: 12px;
+            }
+
+            .theme-toggle {
+                width: 50px;
+                height: 25px;
+            }
+
+            .theme-toggle .toggle-circle {
+                width: 20px;
+                height: 20px;
+            }
+
+            [data-theme="dark"] .theme-toggle .toggle-circle {
+                transform: translateX(25px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cta h2 {
+                font-size: 2.2rem;
+            }
+
+            .cta p {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .theme-toggle {
+                width: 45px;
+                height: 22px;
+            }
+
+            .theme-toggle .toggle-circle {
+                width: 18px;
+                height: 18px;
+            }
+
+            [data-theme="dark"] .theme-toggle .toggle-circle {
+                transform: translateX(23px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Announcement Banner -->
+    <div class="announcement-banner" id="announcementBanner">
+        🚀 Introducing CW BOS – Agentic AI for ERP, POS, & Commerce. <a href="https://cwbos.com">Explore</a> | <a
+            href="https://cwbos.com/interactive-demo">Demo</a>
+        <span class="close-btn" id="closeBanner" role="button" aria-label="Close announcement banner">&times;</span>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <div class="logo-icon">CW</div>
+                    <div class="logo-text">CW <span>Suite</span></div>
+                </a>
+                <div class="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <div class="nav-links">
+                    <a href="#apps" class="nav-link">Apps</a>
+                    <a href="#features" class="nav-link">Solutions</a>
+                    <a href="#analytics" class="nav-link">Analytics</a>
+                    <a href="#clients" class="nav-link">Clients</a>
+                    <a href="#faq" class="nav-link">Support</a>
+                    <a href="#testimonials" class="nav-link">Resources</a>
+                </div>
+                <div class="nav-actions">
+                    <div class="theme-toggle" id="themeToggle">
+                        <div class="toggle-circle">
+                            <i class="fas fa-sun sun-icon"></i>
+                            <i class="fas fa-moon moon-icon"></i>
+                        </div>
+                    </div>
+                    <a href="#" class="btn btn-outline">Login</a>
+                    <a href="#" class="btn btn-primary">Contact Sales</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Empower Your <span>Retail Business</span> with CW Suite</h1>
+                <p>Discover a unified, scalable, and flexible solution that streamlines retail operations and enables
+                    seamless integration with existing tools.</p>
+                <div class="hero-btns">
+                    <a href="#" class="btn btn-primary btn-lg">Start Free Trial</a>
+                    <a href="#" class="btn btn-outline btn-lg">View Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section class="clients" id="clients">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Trusted Clients</h2>
+                <p>Leading brands rely on CW Suite to power their retail operations.</p>
+            </div>
+            <div class="clients-container">
+                <div class="clients-scroll">
+                    <!-- First set of logos -->
+                    <div class="client-logo">
+                        <img src="https://dadus.co.in/cdn/shop/files/image_40_3.png?v=1680775597&width=400"
+                            alt="Decathlon Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Decathlon_Logo24.svg/1024px-Decathlon_Logo24.svg.png"
+                            alt="Chocolala Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://media-cdn.tripadvisor.com/media/photo-s/19/3f/a4/f0/mysore-special-sweets.jpg"
+                            alt="Dadus Sweets Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxD45ED5jInYM9UQeoypZhwmmk_2rXc7JN2Q&s"
+                            alt="Anushyam Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://media.licdn.com/dms/image/v2/C560BAQFsAdieCWzKPg/company-logo_200_200/company-logo_200_200/0/1630647449770/india_sweet_house_logo?e=2147483647&v=beta&t=beRnbdlqk324aVzkTxlpVQ-TD2WEg1JB4Gd3XHBldyw"
+                            alt="Mahalakshmi Sweets Logo" loading="lazy">
+                    </div>
+                    <!-- Duplicated set for infinite scroll -->
+                    <div class="client-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxD45ED5jInYM9UQeoypZhwmmk_2rXc7JN2Q&s"
+                            alt="Anushyam Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Decathlon_Logo24.svg/1024px-Decathlon_Logo24.svg.png"
+                            alt="Chocolala Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://media-cdn.tripadvisor.com/media/photo-s/19/3f/a4/f0/mysore-special-sweets.jpg"
+                            alt="Dadus Sweets Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxD45ED5jInYM9UQeoypZhwmmk_2rXc7JN2Q&s"
+                            alt="Anushyam Logo" loading="lazy">
+                    </div>
+                    <div class="client-logo">
+                        <img src="https://d-sproutz-cwsuite-com.s3.ap-south-1.amazonaws.com/attachment/3CF003E557704269AFF00463F1F452E8/7001/40F4CF4094994C54A5867DA26D032A9E/6DD08EE6AC9044C995FC6C288582EF74/Screenshot_2025-07-17_4.45.36_PM-removebg-preview.png"
+                            alt="Mahalakshmi Sweets Logo" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>A Truly Unified Commerce Platform</h2>
+                <p>Brings together all aspects of a retailer's business into a single, cohesive system.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop&fm=webp"
+                            alt="Real-Time Sales Analytics" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Unify Sales Channels in Real Time</h3>
+                        <p>Seamlessly integrate and manage all sales channels from one central location with real-time
+                            synchronization.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.pexels.com/photos/4482900/pexels-photo-4482900.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop&fm=webp"
+                            alt="Inventory Management System" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Streamline Inventory Management</h3>
+                        <p>Optimize your inventory system to reduce costs, improve customer satisfaction, and adapt to
+                            demand changes.</p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=900&h=600&fit=crop&fm=webp"
+                            alt="Store Associates Collaboration" loading="lazy">
+                    </div>
+                    <div class="feature-content">
+                        <h3>Empower Store Associates</h3>
+                        <p>Equip your team with tools to assist customers effectively and contribute to store success.
+                        </p>
+                        <a href="#" class="btn btn-outline">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analytics Section -->
+    <section class="analytics" id="analytics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Data-Driven Insights</h2>
+                <p>Advanced analytics to optimize your retail operations and boost profitability.</p>
+            </div>
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Sales Performance</h3>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                <div class="analytics-card">
+                    <h3>Inventory Trends</h3>
+                    <div class="chart-container">
+                        <canvas id="inventoryChart"></canvas>
+                    </div>
+                </div>
+                <div class="analytics-card">
+                    <h3>Customer Demographics</h3>
+                    <div class="chart-container">
+                        <canvas id="customerChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Section -->
+    <section class="apps" id="apps">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apps for Every Aspect of Your Business</h2>
+                <p>Select specific tools that best meet your needs from our comprehensive suite.</p>
+            </div>
+            <div class="apps-container">
+                <div class="scroll-btn left" data-direction="left">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div class="scroll-btn right" data-direction="right">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+                <div class="apps-scroll">
+                    <!-- First set of apps -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3153204/pexels-photo-3153204.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Point of Sale System" loading="lazy">
+                        </div>
+                        <h3>Point of Sale</h3>
+                        <p>Process transactions, monitor inventory, and track buying trends with an interactive POS
+                            system.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/4489749/pexels-photo-4489749.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Inventory Management Tool" loading="lazy">
+                        </div>
+                        <h3>Inventory Management</h3>
+                        <p>Centralized control over your stocks to minimize out-of-stocks and optimize supply chain.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Sales Management Dashboard" loading="lazy">
+                        </div>
+                        <h3>Sales Management</h3>
+                        <p>Manage and optimize sales activities with lead tracking and communication tools.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Finance Management Interface" loading="lazy">
+                        </div>
+                        <h3>Finance Management</h3>
+                        <p>Budgeting, expense tracking, bill payments, and financial insights in one place.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="HRMS Platform" loading="lazy">
+                        </div>
+                        <h3>HRMS</h3>
+                        <p>Automate HR operations including recruitment, onboarding, and performance evaluations.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Composer App Builder" loading="lazy">
+                        </div>
+                        <h3>Composer</h3>
+                        <p>Build applications with visual interfaces, pre-built components, and templates.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <!-- Duplicated set for infinite scroll -->
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3153204/pexels-photo-3153204.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Point of Sale System" loading="lazy">
+                        </div>
+                        <h3>Point of Sale</h3>
+                        <p>Process transactions, monitor inventory, and track buying trends with an interactive POS
+                            system.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/4489749/pexels-photo-4489749.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Inventory Management Tool" loading="lazy">
+                        </div>
+                        <h3>Inventory Management</h3>
+                        <p>Centralized control over your stocks to minimize out-of-stocks and optimize supply chain.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Sales Management Dashboard" loading="lazy">
+                        </div>
+                        <h3>Sales Management</h3>
+                        <p>Manage and optimize sales activities with lead tracking and communication tools.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Finance Management Interface" loading="lazy">
+                        </div>
+                        <h3>Finance Management</h3>
+                        <p>Budgeting, expense tracking, bill payments, and financial insights in one place.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="HRMS Platform" loading="lazy">
+                        </div>
+                        <h3>HRMS</h3>
+                        <p>Automate HR operations including recruitment, onboarding, and performance evaluations.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                    <div class="app-card">
+                        <div class="app-icon">
+                            <img src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg?auto=compress&cs=tinysrgb&w=100&h=100&fit=crop&fm=webp"
+                                alt="Composer App Builder" loading="lazy">
+                        </div>
+                        <h3>Composer</h3>
+                        <p>Build applications with visual interfaces, pre-built components, and templates.</p>
+                        <a href="#" class="btn btn-outline">Explore</a>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Transform Your Retail Business?</h2>
+                <p>Join thousands of retailers who have streamlined their operations with CW Suite.</p>
+                <a href="#" class="btn btn-lg">Start Your Free Trial Today</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Trusted by Retailers Worldwide</h2>
+                <p>Hear from our customers about how CW Suite has transformed their businesses.</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://www.shutterstock.com/image-photo/happy-middle-aged-business-man-600nw-2426323925.jpg"
+                                alt="Vrinda Singh">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Vrinda Singh</h4>
+                            <p>Co-founder, Just In</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"The ease of use of Suite apps makes business operations super easy. Definitely more value
+                            for the money."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://media.istockphoto.com/id/1369199360/photo/portrait-of-a-handsome-young-businessman-working-in-office.jpg?s=612x612&w=0&k=20&c=ujyGdu8jKI2UB5515XZA33Tt4DBhDU19dKSTUTMZvrg="
+                                alt="Diwakar Rao">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Diwakar Rao</h4>
+                            <p>Owner, Dadus Sweets</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"CW Suite's inventory and sales management have been a game-changer for Dadus Sweets. Our
+                            operations are smoother, and tracking is effortless!"</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://media.istockphoto.com/id/1369199360/photo/portrait-of-a-handsome-young-businessman-working-in-office.jpg?s=612x612&w=0&k=20&c=ujyGdu8jKI2UB5515XZA33Tt4DBhDU19dKSTUTMZvrg="
+                                alt="Manoj Sharma">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Manoj Sharma</h4>
+                            <p>Director, Mahalakshmi Sweets</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"We've seen significant improvements in our daily transactions and customer handling thanks
+                            to CW Suite. It's truly a comprehensive solution."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                alt="Omar Al-Mansoori">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Omar Al-Mansoori</h4>
+                            <p>CEO, Chocolala Middle East</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"Expanding into new markets is seamless with CW Suite. Its robust features and reliable
+                            support have made it an invaluable asset for Chocolala."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                alt="Anusha Reddy">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Anusha Reddy</h4>
+                            <p>Founder, Anushyam Sweets</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"From managing multiple outlets to handling online orders, CW Suite handles it all with ease.
+                            Anushyam Sweets relies on it daily!"</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">
+                            <img src="https://images.pexels.com/photos/3184611/pexels-photo-3184611.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                                alt="Sarah Peterson">
+                        </div>
+                        <div class="testimonial-info">
+                            <h4>Sarah Peterson</h4>
+                            <p>Boutique Store Manager</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-content">
+                        <p>"The POS system is incredibly intuitive. Our checkout times have improved significantly, and
+                            customers love the experience."</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know about CW Suite.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq1">
+                        What is the CW Suite Price Connect App?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" id="faq1">
+                        <p>The Price Connect App is a powerful tool within CW Suite that allows you to monitor
+                            competitor pricing in real-time across various marketplaces and e-commerce platforms,
+                            helping you make informed pricing decisions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq2">
+                        How does the Price Connect App work?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" id="faq2">
+                        <p>The app continuously scans competitor websites and marketplaces for your specified products,
+                            collecting pricing data and presenting it in an easy-to-understand dashboard with alerts for
+                            significant changes.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq3">
+                        Which marketplaces can the app connect to?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" id="faq3">
+                        <p>CW Suite Price Connect integrates with all major marketplaces including Amazon, eBay,
+                            Walmart, and over 50 specialized retail platforms globally.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq4">
+                        Is the data provided by the app real-time?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" id="faq4">
+                        <p>Yes, our system updates pricing information every 15 minutes to ensure you have the most
+                            current data for decision-making.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" role="button" aria-expanded="false" aria-controls="faq5">
+                        How does the app update the competitor data?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer" id="faq5">
+                        <p>Data is refreshed every 15 minutes during business hours and hourly overnight to provide near
+                            real-time insights without overwhelming your system.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo">
+                        <div class="logo-text" style="color:#ffffff; font-size:28px;">CW <span
+                                style="color:var(--primary)">Suite</span></div>
+                    </a>
+                    <p style="color:#94a3b8; margin-top:24px;">Empowering retailers with comprehensive, scalable
+                        solutions for all business sizes.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Point of Sale</a></li>
+                        <li><a href="#">Inventory Management</a></li>
+                        <li><a href="#">Sales Management</a></li>
+                        <li><a href="#">Purchase Management</a></li>
+                        <li><a href="#">Finance Management</a></li>
+                        <li><a href="#">HRMS</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Status</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 CW Suite LLC. All rights reserved. | <a href="#" style="color:#94a3b8">Privacy Policy</a>
+                    | <a href="#" style="color:#94a3b8">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky CTA -->
+    <a href="#" class="sticky-cta">Start Free Trial</a>
+
+    <script>
+        // Announcement banner dismissal
+        document.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('announcementBanner');
+            const closeBtn = document.getElementById('closeBanner');
+            const header = document.getElementById('header');
+
+            // Ensure banner is visible on load if not dismissed
+            if (banner) {
+                banner.classList.remove('hidden');
+            }
+
+            // Add click event to close button
+            if (closeBtn && header) {
+                closeBtn.addEventListener('click', () => {
+                    banner.classList.add('hidden'); // Hide the banner
+                    header.classList.add('no-banner'); // Move header to top: 0
+                });
+            }
+
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                body.setAttribute('data-theme', savedTheme);
+            }
+
+            themeToggle.addEventListener('click', () => {
+                if (body.getAttribute('data-theme') === 'dark') {
+                    body.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // Hamburger menu toggle
+            document.querySelector('.hamburger').addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.toggle('active');
+            });
+
+            // FAQ toggle functionality with ARIA support
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentNode;
+                    const isActive = item.classList.toggle('active');
+                    question.setAttribute('aria-expanded', isActive);
+                });
+            });
+
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Scroll buttons for apps section
+            document.querySelectorAll('.scroll-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const container = document.querySelector('.apps-scroll');
+                    const direction = button.dataset.direction;
+                    const scrollAmount = 400;
+                    if (direction === 'left') {
+                        container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                    } else {
+                        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Sticky CTA visibility
+            window.addEventListener('scroll', () => {
+                const stickyCta = document.querySelector('.sticky-cta');
+                if (window.scrollY > 500) {
+                    stickyCta.style.display = 'block';
+                } else {
+                    stickyCta.style.display = 'none';
+                }
+            });
+
+            // Initialize charts
+            const initCharts = () => {
+                // Sales Chart
+                const salesCtx = document.getElementById('salesChart').getContext('2d');
+                new Chart(salesCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        datasets: [{
+                            label: 'Monthly Sales (₹)',
+                            data: [12500, 19000, 18000, 22000, 19500, 23000, 28000, 26000, 30000, 32000, 35000, 40000],
+                            backgroundColor: 'rgba(155, 213, 5, 0.7)',
+                            borderColor: 'rgba(155, 213, 5, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(200, 200, 200, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'var(--text-color)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Inventory Chart
+                const inventoryCtx = document.getElementById('inventoryChart').getContext('2d');
+                new Chart(inventoryCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        datasets: [{
+                            label: 'Inventory Level',
+                            data: [1200, 1350, 1100, 1050, 1150, 1000, 950, 900, 850, 800, 750, 700],
+                            fill: true,
+                            backgroundColor: 'rgba(13, 202, 240, 0.2)',
+                            borderColor: 'rgba(13, 202, 240, 1)',
+                            tension: 0.3,
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                grid: {
+                                    color: 'rgba(200, 200, 200, 0.1)'
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: 'var(--text-color)'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // Customer Chart
+                const customerCtx = document.getElementById('customerChart').getContext('2d');
+                new Chart(customerCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                        datasets: [{
+                            label: 'Customer Age Groups',
+                            data: [15, 35, 25, 15, 10],
+                            backgroundColor: [
+                                'rgba(155, 213, 5, 0.7)',
+                                'rgba(13, 202, 240, 0.7)',
+                                'rgba(111, 66, 193, 0.7)',
+                                'rgba(255, 193, 7, 0.7)',
+                                'rgba(220, 53, 69, 0.7)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: 'var(--text-color)'
+                                }
+                            }
+                        }
+                    }
+                });
+            };
+
+            // Initialize charts when DOM is loaded
+            initCharts();
+        });
+
+        // Add to script section
+        document.addEventListener('DOMContentLoaded', () => {
+            // Image fallback for broken links
+            document.querySelectorAll('img').forEach(img => {
+                img.onerror = function () {
+                    this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24"><rect width="24" height="24" fill="%23e9ecef"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%236c757d" font-family="monospace" font-size="10px">No Image</text></svg>';
+                };
+            });
+        });
+    </script>
+</body>
+
+</html>
